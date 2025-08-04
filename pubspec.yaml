@@ -1,0 +1,12 @@
+name: calendar_date
+description: "A Dart package for managing timezone-agnostic calendar dates."
+version: 0.0.1
+homepage: 
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+
+dev_dependencies:
+
