@@ -21,9 +21,24 @@ class Stride<T extends Stridable<T, E>, E extends Object> extends Iterable<T> {
                 (from <= to && from + by > from),
             'StrideTo: Incrementing $from by $by must move towards $to.');
 
+  /// Checks if the stride arguments are valid.
+  /// If from is greater than to, the increment must be negative.
+  /// If from is less than to, the increment must be positive.
+  bool _hasValidArguments() =>
+      (from >= to && from + by < from) || (from <= to && from + by > from);
+
   @override
   Iterator<T> get iterator => _generator.iterator;
   Iterable<T> get _generator sync* {
+    if (!_hasValidArguments()) {
+      // Caught by assertion in debug
+      throw ArgumentError(
+          'StrideTo: Incrementing $from by $by must move towards $to.');
+    }
+    if (from == to) {
+      yield from;
+      return;
+    }
     T prev = from;
     T current = from;
     if (from < to) {
@@ -32,6 +47,7 @@ class Stride<T extends Stridable<T, E>, E extends Object> extends Iterable<T> {
         prev = current;
         current = current + by;
         if (current == prev) {
+          // Caught by assertion in debug
           throw ArgumentError(
               'StrideTo: Infinite loop detected. The increment is too small.');
         }
@@ -42,6 +58,7 @@ class Stride<T extends Stridable<T, E>, E extends Object> extends Iterable<T> {
         prev = current;
         current = current + by;
         if (current == prev) {
+          // Caught by assertion in debug
           throw ArgumentError(
               'StrideTo: Infinite loop detected. The increment is too small.');
         }
