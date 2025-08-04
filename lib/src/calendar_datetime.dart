@@ -1,18 +1,22 @@
 import 'utils.dart';
 import 'calendar_date.dart' show CalendarDate;
+import 'stride.dart' show Stridable;
 
-class CalendarDateTime implements Comparable<CalendarDateTime> {
+class CalendarDateTime
+    implements
+        Comparable<CalendarDateTime>,
+        Stridable<CalendarDateTime, Duration> {
   final DateTime _internalDateTime;
   DateTime asDateTime() => DateTime.utc(
-    year,
-    month,
-    day,
-    hour,
-    minute,
-    second,
-    millisecond,
-    microsecond,
-  );
+        year,
+        month,
+        day,
+        hour,
+        minute,
+        second,
+        millisecond,
+        microsecond,
+      );
 
   // Constructors
   CalendarDateTime(
@@ -25,15 +29,15 @@ class CalendarDateTime implements Comparable<CalendarDateTime> {
     millisecond = 0,
     microsecond = 0,
   ]) : _internalDateTime = DateTime.utc(
-         year,
-         month,
-         day,
-         hour,
-         minute,
-         second,
-         millisecond,
-         microsecond,
-       );
+          year,
+          month,
+          day,
+          hour,
+          minute,
+          second,
+          millisecond,
+          microsecond,
+        );
 
   /// Local Calendar Date & Time
   factory CalendarDateTime.local() =>
@@ -47,23 +51,25 @@ class CalendarDateTime implements Comparable<CalendarDateTime> {
   factory CalendarDateTime.fromMillisecondsSinceEpoch(
     int millisecondsSinceEpoch, {
     bool inLocalTime = false,
-  }) => CalendarDateTime.fromDateTime(
-    DateTime.fromMillisecondsSinceEpoch(
-      millisecondsSinceEpoch,
-      isUtc: !inLocalTime,
-    ),
-  );
+  }) =>
+      CalendarDateTime.fromDateTime(
+        DateTime.fromMillisecondsSinceEpoch(
+          millisecondsSinceEpoch,
+          isUtc: !inLocalTime,
+        ),
+      );
 
   /// Creates a Date object from a timestamp in microseconds since epoch.
   factory CalendarDateTime.fromMicrosecondsSinceEpoch(
     int microsecondsSinceEpoch, {
     bool inLocalTime = false,
-  }) => CalendarDateTime.fromDateTime(
-    DateTime.fromMicrosecondsSinceEpoch(
-      microsecondsSinceEpoch,
-      isUtc: !inLocalTime,
-    ),
-  );
+  }) =>
+      CalendarDateTime.fromDateTime(
+        DateTime.fromMicrosecondsSinceEpoch(
+          microsecondsSinceEpoch,
+          isUtc: !inLocalTime,
+        ),
+      );
 
   /// Creates a CalendarDateTime object from a DateTime object.
   /// Ignores timezone.
@@ -85,9 +91,8 @@ class CalendarDateTime implements Comparable<CalendarDateTime> {
   }
 
   String toIso8601String() {
-    String y = (year >= -9999 && year <= 9999)
-        ? year.fourDigits
-        : year.sixDigits;
+    String y =
+        (year >= -9999 && year <= 9999) ? year.fourDigits : year.sixDigits;
     String m = month.twoDigits;
     String d = day.twoDigits;
     String h = hour.twoDigits;

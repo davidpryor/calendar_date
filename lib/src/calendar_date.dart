@@ -1,13 +1,15 @@
 import 'utils.dart';
 import 'calendar_datetime.dart' show CalendarDateTime;
+import 'stride.dart' show Stridable;
 
-class CalendarDate implements Comparable<CalendarDate> {
+class CalendarDate
+    implements Comparable<CalendarDate>, Stridable<CalendarDate, Duration> {
   final DateTime _internalDateTime;
   DateTime asDateTime() => DateTime.utc(year, month, day, 0, 0, 0, 0, 0);
 
   // Constructors
   CalendarDate(year, [month = 1, day = 1])
-    : _internalDateTime = DateTime.utc(year, month, day, 0, 0, 0, 0, 0);
+      : _internalDateTime = DateTime.utc(year, month, day, 0, 0, 0, 0, 0);
 
   /// Local Calendar Date
   factory CalendarDate.local() => CalendarDate.fromDateTime(DateTime.now());
@@ -21,24 +23,26 @@ class CalendarDate implements Comparable<CalendarDate> {
   factory CalendarDate.fromMillisecondsSinceEpoch(
     int millisecondsSinceEpoch, {
     bool inLocalTime = false,
-  }) => CalendarDate.fromDateTime(
-    DateTime.fromMillisecondsSinceEpoch(
-      millisecondsSinceEpoch,
-      isUtc: !inLocalTime,
-    ),
-  );
+  }) =>
+      CalendarDate.fromDateTime(
+        DateTime.fromMillisecondsSinceEpoch(
+          millisecondsSinceEpoch,
+          isUtc: !inLocalTime,
+        ),
+      );
 
   /// Creates a Date object from a timestamp in microseconds since epoch.
   /// It will truncate the time component.
   factory CalendarDate.fromMicrosecondsSinceEpoch(
     int microsecondsSinceEpoch, {
     bool inLocalTime = false,
-  }) => CalendarDate.fromDateTime(
-    DateTime.fromMicrosecondsSinceEpoch(
-      microsecondsSinceEpoch,
-      isUtc: !inLocalTime,
-    ),
-  );
+  }) =>
+      CalendarDate.fromDateTime(
+        DateTime.fromMicrosecondsSinceEpoch(
+          microsecondsSinceEpoch,
+          isUtc: !inLocalTime,
+        ),
+      );
 
   /// Creates a DateUTC object from a DateTime object.
   /// Ignores timezone.
@@ -68,9 +72,8 @@ class CalendarDate implements Comparable<CalendarDate> {
   }
 
   String toIso8601String() {
-    String y = (year >= -9999 && year <= 9999)
-        ? year.fourDigits
-        : year.sixDigits;
+    String y =
+        (year >= -9999 && year <= 9999) ? year.fourDigits : year.sixDigits;
     String m = month.twoDigits;
     String d = day.twoDigits;
     return '$y-$m-$d';
@@ -101,15 +104,15 @@ class CalendarDate implements Comparable<CalendarDate> {
   /// Add a duration to the date.
   /// It will ignore time attributes that would not change the year, month, or day.
   CalendarDate add(Duration duration) => CalendarDate.fromDateTime(
-    _internalDateTime.add(Duration(days: duration.inDays)),
-  );
+        _internalDateTime.add(Duration(days: duration.inDays)),
+      );
   CalendarDate operator +(Duration duration) => add(duration);
 
   /// Subtract a duration to the date.
   /// It will ignore time attributes that would not change the year, month, or day.
   CalendarDate subtract(Duration duration) => CalendarDate.fromDateTime(
-    _internalDateTime.subtract(Duration(days: duration.inDays)),
-  );
+        _internalDateTime.subtract(Duration(days: duration.inDays)),
+      );
   CalendarDate operator -(Duration duration) => subtract(duration);
 
   /// Difference between two dates.
