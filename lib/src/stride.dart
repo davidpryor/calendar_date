@@ -10,6 +10,7 @@ abstract class Stridable<T, E> {
   bool operator ==(Object other);
 }
 
+/// @EXPERIMENTAL
 /// A stride operation that generates an iterable of values from `from` to `to`
 class Stride<T extends Stridable<T, E>, E extends Object> extends Iterable<T> {
   final T from;
