@@ -1,39 +1,86 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# calendar_date
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+`calendar_date` is a dart package for creating timezone-agnostic Dates and DateTimes.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+## License
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+This project is licensed under the [MIT License](LICENSE).
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Immutable `CalendarDate` and `CalendarDateTime` classes
+- Easy date arithmetic (add, subtract, difference)
+- Date range iteration and stride utilities
+- Comparison operators and equality
+- Utilities for working with months, weeks, and days
+- No external dependencies
 
-## Getting started
+## Installation
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add the following to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+	calendar_date: ^<latest_version>
+```
+
+Then run:
+
+```sh
+dart pub get
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+Import the package:
 
 ```dart
-const like = 'sample';
+import 'package:calendar_date/calendar_date.dart';
 ```
 
-## Additional information
+### Creating Dates
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+final date = CalendarDate(2025, 8, 4);
+final today = CalendarDate.local();
+final todayUtc = CalendarDate.zulu();
+final today2 = CalendarDate.fromDateTime(DateTime.now());
+final today2Utc = CalendarDate.fromDateTime(DateTime.timestamp());
+```
+
+### Date Arithmetic
+
+```dart
+final tomorrow = date + const Duration(days: 1); 
+final yesterday = date - const Duration(days: 1);
+```
+
+### Date Ranges and Stride
+
+```dart
+for (final d in date.t0(tomorrow, by: const Duration(days: 1))) {
+	print(d);
+}
+```
+```
+OUT:
+2025-08-04
+2025-08-05
+```
+### Comparison
+
+```dart
+if (date > CalendarDate(2025, 1, 1)) {
+	print('Date is after Jan 1, 2025');
+}
+```
+
+## Contributing
+
+Contributions are welcome! Please open issues or submit pull requests on [GitHub](https://github.com/davidpryor/calendar_date).
+
+1. Fork the repository
+2. Create a feature branch
+3. Write tests for your changes
+4. Open a pull request
+
