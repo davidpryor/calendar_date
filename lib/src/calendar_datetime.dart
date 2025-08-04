@@ -39,11 +39,11 @@ class CalendarDateTime
           microsecond,
         );
 
-  /// Local Calendar Date & Time
+  /// Calendar Date & Time from local time.
   factory CalendarDateTime.local() =>
       CalendarDateTime.fromDateTime(DateTime.now());
 
-  /// Actual UTC Calendar Date & Time
+  /// Calendar Date & Time from UTC timestamp.
   factory CalendarDateTime.zulu() =>
       CalendarDateTime.fromDateTime(DateTime.timestamp());
 

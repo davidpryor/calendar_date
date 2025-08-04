@@ -11,10 +11,10 @@ class CalendarDate
   CalendarDate(year, [month = 1, day = 1])
       : _internalDateTime = DateTime.utc(year, month, day, 0, 0, 0, 0, 0);
 
-  /// Local Calendar Date
+  /// Calendar Date from local time.
   factory CalendarDate.local() => CalendarDate.fromDateTime(DateTime.now());
 
-  /// Local Calendar Date
+  /// Calendar Date from UTC timestamp.
   factory CalendarDate.zulu() =>
       CalendarDate.fromDateTime(DateTime.timestamp());
 
