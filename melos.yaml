@@ -1,0 +1,7 @@
+name: pryor_packages
+packages:
+  - packages/**
+scripts:
+  publish: melos exec -c "dart pub publish --dry-run" 
+
+# Optional: scripts, versioning, and other melos config can be added here.
