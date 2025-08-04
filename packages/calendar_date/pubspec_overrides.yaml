@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: strider
+dependency_overrides:
+  strider:
+    path: ../strider
