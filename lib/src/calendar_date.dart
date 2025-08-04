@@ -174,8 +174,8 @@ extension CalendarDateConversion on CalendarDateTime {
 extension CalendarDateStrideUtil on CalendarDate {
   /// Creates a generator iterator that yields dates from this date to the [to] date,
   /// [to] is inclusive.
-  Iterable<CalendarDate> stride({
-    required CalendarDate to,
+  Iterable<CalendarDate> to(
+    CalendarDate to, {
     required Duration by,
   }) {
     return Stride<CalendarDate, Duration>(this, to, by);
