@@ -1,6 +1,7 @@
+import 'package:strider/strider.dart' show Stridable, Stride;
+
 import 'utils.dart';
 import 'calendar_datetime.dart' show CalendarDateTime;
-import 'stride.dart' show Stridable, Stride;
 
 class CalendarDate
     implements Comparable<CalendarDate>, Stridable<CalendarDate, Duration> {

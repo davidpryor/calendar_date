@@ -5,4 +5,3 @@ export 'src/calendar_datetime.dart'
         CalendarDateTime,
         CalendarDateTimeConversion,
         CalendarDateTimeStrideUtil;
-export 'src/stride.dart' show Stridable, Stride;
