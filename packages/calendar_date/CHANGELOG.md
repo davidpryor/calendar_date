@@ -1,3 +1,8 @@
+## 0.9.1
+
+* move Stride to its own package
+
+
 ## 0.9.0
 
 * Adds base CalendarDate and CalendarDateTime classes

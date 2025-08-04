@@ -1,6 +1,6 @@
 name: strider
 description: "A Dart package for creating Swift-like Strides."
-version: 0.9.0
+version: 0.9.1
 homepage: https://github.com/davidpryor/calendar_date/tree/master/packages/strider
 
 environment:
