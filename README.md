@@ -58,7 +58,7 @@ final yesterday = date - const Duration(days: 1);
 ### Date Ranges and Stride
 
 ```dart
-for (final d in date.t0(tomorrow, by: const Duration(days: 1))) {
+for (final d in date.to(tomorrow, by: const Duration(days: 1))) {
 	print(d);
 }
 ```
