@@ -4,9 +4,4 @@ version: 0.0.1
 homepage: 
 
 environment:
-  sdk: ^3.8.1
-
-dependencies:
-
-dev_dependencies:
-
+  sdk: ">=3.0.0"
