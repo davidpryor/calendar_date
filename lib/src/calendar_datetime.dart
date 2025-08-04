@@ -1,6 +1,6 @@
 import 'utils.dart';
 import 'calendar_date.dart' show CalendarDate;
-import 'stride.dart' show Stridable;
+import 'stride.dart' show Stridable, Stride;
 
 class CalendarDateTime
     implements
@@ -209,4 +209,15 @@ class CalendarDateTime
 extension CalendarDateTimeConversion on CalendarDate {
   CalendarDateTime asCalendarDateTime() =>
       CalendarDateTime(year, month, day, 0, 0, 0, 0, 0);
+}
+
+extension CalendarDateTimeStrideUtil on CalendarDateTime {
+  /// Creates a generator iterator that yields dates from this date to the [to] date,
+  /// [to] is inclusive.
+  Iterable<CalendarDateTime> stride({
+    required CalendarDateTime to,
+    required Duration by,
+  }) {
+    return Stride<CalendarDateTime, Duration>(this, to, by);
+  }
 }
