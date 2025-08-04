@@ -20,14 +20,14 @@ class CalendarDateTime
 
   // Constructors
   CalendarDateTime(
-    year, [
-    month = 1,
-    day = 1,
-    hour = 0,
-    minute = 0,
-    second = 0,
-    millisecond = 0,
-    microsecond = 0,
+    int year, [
+    int month = 1,
+    int day = 1,
+    int hour = 0,
+    int minute = 0,
+    int second = 0,
+    int millisecond = 0,
+    int microsecond = 0,
   ]) : _internalDateTime = DateTime.utc(
           year,
           month,
@@ -114,25 +114,31 @@ class CalendarDateTime
   int get hashCode => _internalDateTime.hashCode;
   bool isBefore(CalendarDateTime other) =>
       _internalDateTime.isBefore(other._internalDateTime);
+  @override
   bool operator <(CalendarDateTime other) => isBefore(other);
   bool isAfter(CalendarDateTime other) =>
       _internalDateTime.isAfter(other._internalDateTime);
+  @override
   bool operator >(CalendarDateTime other) => isAfter(other);
   bool isAtSameMomentAs(CalendarDateTime other) =>
       _internalDateTime.isAtSameMomentAs(other._internalDateTime);
+  @override
   bool operator <=(CalendarDateTime other) =>
       isBefore(other) || isAtSameMomentAs(other);
+  @override
   bool operator >=(CalendarDateTime other) =>
       isAfter(other) || isAtSameMomentAs(other);
 
   /// Add a duration to the date.
   CalendarDateTime add(Duration duration) =>
       CalendarDateTime.fromDateTime(_internalDateTime.add(duration));
+  @override
   CalendarDateTime operator +(Duration duration) => add(duration);
 
   /// Subtract a duration to the date.
   CalendarDateTime subtract(Duration duration) =>
       CalendarDateTime.fromDateTime(_internalDateTime.subtract(duration));
+  @override
   CalendarDateTime operator -(Duration duration) => subtract(duration);
 
   /// Difference between two dates.
@@ -187,7 +193,7 @@ class CalendarDateTime
     int? millisecond,
     int? microsecond,
   }) {
-    return CalendarDateTime.new(
+    return CalendarDateTime(
       year ?? this.year,
       month ?? this.month,
       day ?? this.day,
